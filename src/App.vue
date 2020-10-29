@@ -1,13 +1,11 @@
 <template>
   <div>
-    <van-button type="primary">主要按钮</van-button>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import f from ''
 export default {
-
   name: 'App',
 }
 </script>
