@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <van-button type="primary">主要按钮</van-button>
-  </div>
+  <div>Verifyphone</div>
 </template>
 
 <script>
-import f from ''
 export default {
-
-  name: 'App',
+  name: 'Verifyphone',
 }
 </script>
 
