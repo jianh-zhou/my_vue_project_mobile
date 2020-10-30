@@ -11,6 +11,8 @@
 
 <script>
 import { NavBar } from 'vant'
+// 引入对应的api接口函数,进行验证滑块验证码
+// import f from ''
 export default {
   name: 'MyNavBar',
   components: {
@@ -25,7 +27,7 @@ export default {
 
 <style scoped>
 .backBtn{
-margin-bottom: 20px;
+margin-bottom: 40px;
 }
 /deep/.van-icon {
   color: #000;

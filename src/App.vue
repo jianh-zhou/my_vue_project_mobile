@@ -10,5 +10,9 @@ export default {
 }
 </script>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+}
 </style>
