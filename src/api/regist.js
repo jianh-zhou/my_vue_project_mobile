@@ -13,4 +13,9 @@ export const reqVerifyCode = (phone, code) => request({
   url: `${path}/verify_code`,
   data: { phone, code }
 })
-
+// 暴露一个注册账号的api接口函数
+export const reqRegistPhone = (phone, password) => request({
+  method: 'POST',
+  url: `${path}/user`,
+  data: { phone, password }
+})
