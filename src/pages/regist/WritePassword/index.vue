@@ -78,7 +78,7 @@ export default {
 
     // 点击发送验证码
     async toSendCode() {
-      console.log(this.phone * 1)
+      // console.log(this.phone * 1)
       try {
         await reqSendCode(this.phone * 1)
       } catch (err) {

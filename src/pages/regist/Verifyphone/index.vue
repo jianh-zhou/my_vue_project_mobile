@@ -61,11 +61,17 @@ export default {
         // 验证手机号是否正确
         await reqVerifyPhone(phone)
         // 将手机号码设置为缓存
-        window.localStorage.setItem('phone', JSON.stringify(phone))
+        // window.sessionStorage.setItem('phone', JSON.stringify(phone))
+        // this.$store.commit('GET_PHONE', phone)
         // 发送验证码
+        this.$bus.$emit('phone', phone)
         // await
         // 跳转到短信验证码的相关组件
-        this.$router.push('/regist/verifycode')
+        this.$router.push({
+          name: 'verifyMessagePhone',
+          params: { phone },
+          meta: { phone },
+        })  
       } catch (err) {
         Toast(err)
       }

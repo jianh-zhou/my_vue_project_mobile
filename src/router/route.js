@@ -9,17 +9,21 @@ const routes = [
   // 手机号码验证注册的组件
   {
     path: '/regist/verifyphone',
-    component: Verifyphone
+    component: Verifyphone,
+    name: "verifyphone"
   },
   // 发送验证码
   {
     path: '/regist/verifycode',
-    component: VerifyMessagePhone
+    component: VerifyMessagePhone,
+    name: 'verifyMessagePhone'
+
   },
   // 输入注册账号密码
   {
-    path: "/regist/verifypassword",
-    component: WritePassword
+    path: "/regist/verifypassword/:phone",
+    component: WritePassword,
+    name: 'writePassword'
   }
 ]
 export default routes

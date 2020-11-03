@@ -12,6 +12,7 @@ import MyNavBar from '@/components/MyNavBar'
 Vue.component("MyNavBar", MyNavBar)
 // 引入全局公共按钮组件
 import TencentPhone from '@comp/TencentPhone'
+Vue.prototype.$bus = new Vue()
 Vue.component("TencentPhone", TencentPhone)
 new Vue({
   render: h => h(App),

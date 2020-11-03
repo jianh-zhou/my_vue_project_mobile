@@ -23,10 +23,11 @@
         </template>
       </van-field>
     </van-form>
-    <TencentPhone
+    <van-button
+      class="verify-code-btn"
       :disabled="isDisabled"
-      :verifyPhone="toRegistPhone"
       text="下一步"
+      @click="toRegistPhone"
     />
     <p class="query">遇到问题? 请 <span @click="gohome">联系客服</span></p>
   </div>
@@ -55,13 +56,27 @@ export default {
   data() {
     return {
       code: '',
-      isDisabled: false,
+      isDisabled: true,
+      phone: '',
     }
   },
   // 计算属性
   computed: {
-    ...mapState({ phone: (state) => state.phone.phone }),
+    // ...mapState({ phone: (state) => state.phone.phone }),
   },
+  // 组件挂载完毕的生命周期回调函数
+  mounted() {
+    // console.log(this.$route)
+    this.validator()
+    // console.log(this.phone);
+    const s = this.$bus.$on('phone', (phone) => {
+      this.phone = phone
+      console.log(phone)
+      // return phone
+    })
+    console.log(s)
+  },
+
   methods: {
     goBack() {},
     gohome() {
@@ -70,10 +85,22 @@ export default {
 
     // 下一步按钮,进行注册手机号
     async toRegistPhone() {
-      // console.log(this.phone)
-      const { phone, code } = this
+      console.log(this.phone)
+      const {
+        code,
+        $route: {
+          params: { phone },
+        },
+      } = this
+
       try {
-        await reqVerifyCode(phone, code * 1)
+        console.log(phone * 1, code * 1)
+        await reqVerifyCode(phone * 1, code * 1)
+        // 跳转到对应的填写密码页面,并且把手机号作为参数传递过去
+        this.$router.push({
+          name: 'writePassword',
+          params: { phone },
+        })
       } catch (err) {
         Toast(err)
         // console.log(err);
@@ -82,9 +109,10 @@ export default {
 
     // 点击发送验证码
     async toSendCode() {
-      console.log(this.phone * 1)
+      // console.log(this.phone * 1)
+      const phone = this.$route.params.phone
       try {
-        await reqSendCode(this.phone * 1)
+        await reqSendCode(phone)
       } catch (err) {
         Toast(err)
       }
@@ -93,6 +121,7 @@ export default {
     // 验证码规则校验
     validator(val) {
       const reg = /^\d{6}$/
+
       this.isDisabled = !reg.test(val)
       return reg.test(val)
     },
@@ -128,5 +157,12 @@ export default {
 }
 .query span {
   color: #3b7adb;
+}
+.verify-code-btn {
+  margin: 40px 28px 0;
+  width: 86%;
+  border-radius: 30px;
+  background-color: red;
+  color: #fff;
 }
 </style>
