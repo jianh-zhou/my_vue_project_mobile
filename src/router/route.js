@@ -21,7 +21,7 @@ const routes = [
   },
   // 输入注册账号密码
   {
-    path: "/regist/verifypassword/:phone",
+    path: "/regist/verifypassword",
     component: WritePassword,
     name: 'writePassword'
   }

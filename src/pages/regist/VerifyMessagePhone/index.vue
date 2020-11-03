@@ -57,50 +57,49 @@ export default {
     return {
       code: '',
       isDisabled: true,
-      phone: '',
     }
   },
   // 计算属性
   computed: {
-    // ...mapState({ phone: (state) => state.phone.phone }),
+    ...mapState({ phone: (state) => state.phone.phone }),
   },
   // 组件挂载完毕的生命周期回调函数
   mounted() {
     // console.log(this.$route)
     this.validator()
     // console.log(this.phone);
-    const s = this.$bus.$on('phone', (phone) => {
-      this.phone = phone
-      console.log(phone)
-      // return phone
-    })
-    console.log(s)
+    // 全局事件总线,在组件卸载之后,对应的方法并不会消失,但是页面刷新,所有方法会被干掉,因为对应的所有的东西都是重新加载,会把之前的东西全部干掉
+    // const s = this.$bus.$on('phone', (phone) => {
+    //   this.phone = phone
+    //   console.log(1111, phone)
+    //   // return phone
+    // })
+    // console.log(s)
   },
 
   methods: {
-    goBack() {},
+    goBack() {
+      this.$router.back()
+    },
     gohome() {
       this.$router.push('/')
     },
 
     // 下一步按钮,进行注册手机号
     async toRegistPhone() {
-      console.log(this.phone)
-      const {
-        code,
-        $route: {
-          params: { phone },
-        },
-      } = this
-
+      // console.log(this.phone)
+      // const {
+      //   code,
+      //   $route: {
+      //     params: { phone },
+      //   },
+      // } = this
+      const { phone, code } = this
       try {
-        console.log(phone * 1, code * 1)
-        await reqVerifyCode(phone * 1, code * 1)
+        console.log(phone*1,code*1);
+        await reqVerifyCode(phone*1, code*1)
         // 跳转到对应的填写密码页面,并且把手机号作为参数传递过去
-        this.$router.push({
-          name: 'writePassword',
-          params: { phone },
-        })
+        this.$router.push('/regist/verifypassword')
       } catch (err) {
         Toast(err)
         // console.log(err);
@@ -110,7 +109,7 @@ export default {
     // 点击发送验证码
     async toSendCode() {
       // console.log(this.phone * 1)
-      const phone = this.$route.params.phone
+      const phone = this.phone
       try {
         await reqSendCode(phone)
       } catch (err) {

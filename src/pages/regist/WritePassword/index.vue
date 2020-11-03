@@ -4,22 +4,21 @@
     <p class="messageImg">
       <img src="./msg.png" alt="" />
     </p>
-    <p class="reminder">
-      我们将以短信或电话的形式将验证码发送给您，请注意接听0575/025/0592/010等开头的电话
-    </p>
+    <p class="reminder">请设置登录密码</p>
     <van-field
       v-model="code"
       center
       clearable
-      placeholder="请输入短信验证码"
+      placeholder="请设置8-20位登录密码"
       class="megInput"
     >
       <template #button>
-        <van-button size="small" type="primary" round @click="toSendCode"
-          >发送验证码</van-button
-        >
+        <span size="small" type="primary" round @click="toSendCode">11</span>
       </template>
     </van-field>
+    <p class="set-password-tips">
+      密码由8-20位字母、数字或半角符号组成，不能是10位以下纯数字/字母/半角符号，字母需区分大小写
+    </p>
     <TencentPhone
       :disabled="isDisabled"
       :verifyPhone="toRegistPhone"
@@ -90,6 +89,11 @@ export default {
 </script>
 
 <style  scoped>
+.set-password-tips {
+  color: #999;
+  padding: 20px;
+  font-size: 14px;
+}
 .messageImg {
   text-align: center;
   /* height: 88px;
@@ -102,7 +106,9 @@ export default {
 }
 .reminder {
   font-size: 16px;
+  margin: 10px auto 30px;
   padding: 0 30px;
+  text-align: center;
 }
 .megInput {
   padding: 0 30px 10px 30px;
