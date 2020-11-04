@@ -60,8 +60,11 @@ export default {
         const phone = this.phone
         // 验证手机号是否正确
         await reqVerifyPhone(phone)
+        // console.log(phone)
         // 将手机号码设置为缓存
-        window.sessionStorage.setItem('phone', phone * 1)
+        window.localStorage.setItem('phone', phone)
+        this.$store.commit('GET_PHONE')
+        // console.log(window.localStorage.getItem  ('phone'))
         // this.$store.commit('GET_PHONE', phone)
         // 发送验证码
         // this.$bus.$emit('phone', phone)

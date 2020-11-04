@@ -20,14 +20,19 @@ export default {
   },
   props: {
     title: String,
-    goBack: Function,
+    goBack: {
+      Type: Function,
+      default() {
+        return () => {}
+      },
+    },
   },
 }
 </script>
 
 <style scoped>
-.backBtn{
-margin-bottom: 40px;
+.backBtn {
+  margin-bottom: 40px;
 }
 /deep/.van-icon {
   color: #000;

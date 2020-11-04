@@ -1,4 +1,7 @@
 import axios from 'axios'
+// 引入对应的store对象
+import store from '../store/index'
+
 const request = axios.create({
   baseURL: '',
   timeout: 10000,
@@ -9,11 +12,16 @@ const messages = {
   404: '没有找到相关资源,请检查'
 }
 request.interceptors.request.use((config) => {
-  // config.headers['authorization'] = `Bearer${token}`
+  // 在请求时,如果报错,就不会发生请求,而且也不会报错
+  // 
+  const token = store.state.user.token
+  if (token) {
+    config.headers['authorization'] = `Bearer${token}`
+  }
+  // config.headers['authorization'] = `Bearer${window.localStorage.getItem('token')}`
   return config
 })
 request.interceptors.response.use((response) => {
-  // console.log(1);
 
   // 请求完成成功
   if (response.data.code === 20000) {

@@ -65,6 +65,8 @@ export default {
   },
   // 组件挂载完毕的生命周期回调函数
   mounted() {
+    // console.log(window.localStorage.getItem('phone'))
+    // console.log(this.phone)
     // console.log(this.$route)
     this.validator()
     // console.log(this.phone);
@@ -87,7 +89,7 @@ export default {
 
     // 下一步按钮,进行注册手机号
     async toRegistPhone() {
-      // console.log(this.phone)
+      console.log(this.phone)
       // const {
       //   code,
       //   $route: {
@@ -96,8 +98,8 @@ export default {
       // } = this
       const { phone, code } = this
       try {
-        console.log(phone*1,code*1);
-        await reqVerifyCode(phone*1, code*1)
+        // console.log(phone * 1, code * 1)
+        await reqVerifyCode(phone * 1, code * 1)
         // 跳转到对应的填写密码页面,并且把手机号作为参数传递过去
         this.$router.push('/regist/verifypassword')
       } catch (err) {
@@ -108,7 +110,7 @@ export default {
 
     // 点击发送验证码
     async toSendCode() {
-      // console.log(this.phone * 1)
+      console.log(this.phone * 1)
       const phone = this.phone
       try {
         await reqSendCode(phone)
